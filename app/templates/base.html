@@ -13,9 +13,9 @@
             <!--is_anonymous: Flask-Login attribute, cf. UserMixin in models.py-->
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
-            {% else %}}
+            {% else %}
             <a href="{{ url_for('logout') }}">Logout</a>
-            {% endif %}}
+            {% endif %}
         </div>
         <hr>
         {% with messages = get_flashed_messages() %}
