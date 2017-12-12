@@ -7,7 +7,7 @@ from flask_login import logout_user, login_required
 
 @app.route('/')
 @app.route('/index')
-@login_required
+@login_required  # from Flask-Login
 def index():
     user = {'username': 'Miguel'}
     posts = [
@@ -61,3 +61,13 @@ def register():
         flash('Congratulations, you are now a registered ueser!')
         return redirect(url_for('login'))
     return render_template('register.html', title='Register', form=form)
+
+@app.route('/user/<username>')
+@login_required
+def user(username):
+    user = User.query.filter_by(username=username).first_or_404()
+    posts = [
+        {'author': user, 'body': 'Test post #1'},
+        {'author': user, 'body': 'Test post #2'}
+    ]
+    return render_template('user.html', user=user, posts=posts)
