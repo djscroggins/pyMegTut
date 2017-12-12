@@ -4,6 +4,12 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from hashlib import md5
 
+# Association table
+followers = db.Table('followers',
+                     db.Column('folower_id', db.Integer, db.ForeignKey('user.id')),
+                     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+                     )
+
 
 class User(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -15,6 +21,15 @@ class User(UserMixin, db.Model):
     posts = db.relationship('Post', backref='author', lazy='dynamic')
     about_me = db.Column(db.String(140))
     last_seen = db.Column(db.DateTime, default=datetime.utcnow)
+    followed = db.relationship(
+        'User', secondary=followers,
+        # Link left to right side
+        primaryjoin=(followers.c.follower_id == id),
+        # Link right to left side
+        secondaryjoin=(followers.c.followed_id == id),
+        # Define access to relationship from right side, second lazy applies to left side
+        backref=db.backref('followers', lazy='dynamic'), lazy='dynamic'
+    )
 
     def __repr__(self): #This is like toString in Java
         return '<User {}>'.format(self.username)
