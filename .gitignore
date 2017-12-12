@@ -3,4 +3,4 @@
 .idea/pyMegTut.iml
 *.pyc
 app.db
-*.log
+*.log*
