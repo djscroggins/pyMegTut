@@ -9,7 +9,7 @@ from flask_login import logout_user, login_required
 @app.route('/index')
 @login_required  # from Flask-Login
 def index():
-    user = {'username': 'Miguel'}
+    # user = {'username': 'Miguel'}
     posts = [
         {
             'author': {'username': 'John'},
