@@ -6,7 +6,7 @@ from hashlib import md5
 
 # Association table
 followers = db.Table('followers',
-                     db.Column('folower_id', db.Integer, db.ForeignKey('user.id')),
+                     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
                      db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
                      )
 
