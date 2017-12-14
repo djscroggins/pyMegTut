@@ -10,6 +10,7 @@
         <div>
             Microblog:
             <a href="{{ url_for('index') }}">Home</a>
+            <a href="{{ url_for('explore') }}">Explore</a>
             <!--is_anonymous: Flask-Login attribute, cf. UserMixin in models.py-->
             {% if current_user.is_anonymous %}
             <a href="{{ url_for('login') }}">Login</a>
