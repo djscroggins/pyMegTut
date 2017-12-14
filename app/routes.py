@@ -141,3 +141,9 @@ def unfollow(username):
     flash('You are no longer following {}'.format(username))
     return redirect(url_for('user', username=username))
 
+@app.route('/explore')
+@login_required
+def explore():
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', title='Explore', posts=posts)
+
