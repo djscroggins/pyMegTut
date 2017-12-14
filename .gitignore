@@ -4,4 +4,3 @@
 *.pyc
 app.db
 *.log*
-users.txt
