@@ -48,3 +48,9 @@
         {% block app_content %}{% endblock %}
     </div>
 {% endblock %}
+
+{% block scripts %}
+    <!--Preserve base script content-->
+    {{ super() }}
+    {{ moment.include_moment() }}
+{% endblock %}}
